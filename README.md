@@ -31,7 +31,7 @@ Here is an example using the `HLS` color space and HOG parameters of `orientatio
 
 ![alt text][image2]
 
-####2. Final choice of HOG parameters
+#### 2. Final choice of HOG parameters
 
 I tried various combinations of parameters aiming at maximizing the accuracy of the classifier on the test set.
 For example, increasing the orientations parameter from 9 to 11 produced a drop in the classifier accuracy from 0.965 to 0.947. Similarly, decreasing this parameter from 9 to 7 produced a drop in the classifier accuracy from 0.965 to 0.941. Hence I settled for an orientations parameter of 9.
@@ -48,14 +48,14 @@ Using the same approach (varying one parameter at a time), I found the best comb
 `hist_feat = True # Histogram features on or off`
 `hog_feat = True # HOG features on or off`
 
-####3. Classifier training
+#### 3. Classifier training
 
 I trained a linear SVM using 80% of the available dataset. The remaining 20% was reserved for testing.
 Note that the usage of ALL hog channels dramatically incresead the size of the feature vector, slowing down the training time. I decided to keep ALL channels because it also increased the accuracy to more than 98.9% and the training is done only once. There is however a downside to this : the extraction of HOG features from the frames in the later stages of the project will be slower.
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Windows and scales
+#### 1. Windows and scales
 
 I decided to search 3 window positions at 3 scales all over the image.
 The code for this is located in the 9th code cell of the IPython notebook :
@@ -81,7 +81,7 @@ The code for this is located in the 9th code cell of the IPython notebook :
 The 3 windows above all have some overlap with the others. Each window is supposed to be more accurate in finding the vehicles depending on their proximity to our car. Indeed, the first window with a scale of 1.2 searches for cars in the top of the road while the second the second window  (scale of 1.4) searches for cars in the intermediate range and finally the 3rd window searches for close vehicles. As an example, the scale of 1.7 was chosen for this 3rd window as the close cars are expected to measure around 110 pixels (110p / 1.7 = 64.7, which is more or less the size of our patches).
 Note that the more windows we use, the more detections happen including false positives. This means the filtering of the heatmap has to be stricter.
 
-####2. Pipeline and classifier performance
+#### 2. Pipeline and classifier performance
 
 Ultimately I searched on 3 scales using HSV all channels HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 ![alt text][image4]
@@ -91,11 +91,11 @@ To optimize the performance of the classifier, I have tried several search windo
 
 ### Video Implementation
 
-####1. Video output
+#### 1. Video output
 Here's a [link to my video result](./output_video.mp4)
 
 
-####2. Filter false positives
+#### 2. Filter false positives
 
 In order to reduce the false positives, I used 2 techniques : heatmaps and historic detections checks.
 
@@ -109,7 +109,7 @@ We look at the 10 previous frames and if boxes are found in the vicinity of the 
 
 ---
 
-###Discussion
+### Discussion
 
 
 The most difficult part in the project was trying to reduce false positives without affecting the detection of the vehicles. The cycle of tuning parameters, debugging and fixing parts of the video, generating and checking the full video was tedious and time consuming, especially that fixing a part of the video often broke another one.
