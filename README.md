@@ -16,9 +16,9 @@ The goals / steps of this project are the following:
 [video1]: ./output_video.mp4
 
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. HOG features extraction
+#### 1. HOG features extraction
 
 The code for this step is contained in the second cell of the IPython notebook.
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
